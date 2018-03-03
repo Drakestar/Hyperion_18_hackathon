@@ -24,6 +24,11 @@ def generate_terrain(world_map):
                 else:
                     neighbor_probability_1 = .33
                     neighbor_probability_2 = .33
+                    if neighbors_list[0].terrain == 'saltwaterdeep':
+                        neighbor_probability_1 = 0
+                    if neighbors_list[1].terrain == 'saltwaterdeep':
+                        neighbor_probability_2 = 0
+                    neighbor_probability_2 = .33
                     new_terrain = 1 - neighbor_probability_1 - neighbor_probability_2
                     prob_list = [new_terrain, neighbor_probability_1, neighbor_probability_2]
                     choices = [1, 2, 3]
