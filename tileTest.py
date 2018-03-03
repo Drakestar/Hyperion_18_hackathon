@@ -5,7 +5,7 @@ import WorldGen
 tiles = tile.Tile((0, 0), "plains", 0, "wild")
 print(tiles.owner)
 
-world_map = tile.generate_tilemap(14)
+world_map = tile.generate_tilemap(50)
 
 for row in world_map:
     temp_str = ""
