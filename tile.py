@@ -22,3 +22,23 @@ def generate_tilemap(map_scale: int):
         tilemap.append(submap)
 
     return tilemap
+
+def generate_prebuilt_a():
+    # tilemap is a list of lists representing a 2d grid of tiles
+    tilemap = []
+
+    for y in range(10):
+        submap = []
+        submap.append(Tile((x, y), "saltwaterdeep", 0, "wild"))
+        submap.append(Tile((x, y), "desert", 0, "wild"))
+        submap.append(Tile((x, y), "swamp", 0, "wild"))
+        submap.append(Tile((x, y), "mountain", 0, "wild"))
+        submap.append(Tile((x, y), "hills", 0, "wild"))
+        submap.append(Tile((x, y), "forest", 0, "wild"))
+        submap.append(Tile((x, y), "desert", 0, "wild"))
+        submap.append(Tile((x, y), "saltwaterdeep", 0, "wild"))
+        submap.append(Tile((x, y), "saltwaterdeep", 0, "wild"))
+        submap.append(Tile((x, y), "saltwaterdeep", 0, "wild"))
+        tilemap.append(submap)
+
+    return tilemap
