@@ -2,6 +2,7 @@ import tkinter
 from tkinter import Tk, Canvas
 
 
+# Given a terrain name it will return a color to be used
 def terrain_color(terrain_name):
     return {
         'mountain': "grey",
@@ -17,30 +18,35 @@ def terrain_color(terrain_name):
     }[terrain_name]
 
 
-def draw_map(tiles, width, height, window):
-    x1 = 0
-    y1 = 0
-    x2 = 0
-    y2 = 0
+# Draws the map given the tileset, window details, and window itself
+def draw_map(tiles, windowwidth, windowheight, window):
+    # Set Square corners to 0
+    x1 = y1 = x2 = y2 = 0
+    # Go through each row of the tileset
     for row in tiles:
-        y2 += height / len(tiles)
+        # The opposite corners y value updates
+        y2 += windowheight / len(tiles)
+        # Go through every column in the row
         for column in row:
-            x2 += width / len(row)
-            window.create_rectangle(x1, y1, x2, y2, fill=terrain_color(column), outline="")
+            # Advance the location of the bottom right corner of square
+            x2 += windowwidth / len(row)
+            # Create the rectangle with no outline on squares
+            window.create_rectangle(x1, y1, x2, y2, fill=terrain_color(column.terrain), outline="")
+            # Set the left corner to right corner x
             x1 = x2
+        # Advance y to go down
         y1 = y2
-        x1 = 0
-        x2 = 0
+        # Reset x location of boxes
+        x1 = x2 = 0
 
 
-def init():
-    width = 700
-    height = 700
+# Create and return a window given height and width
+def init(windowwidth, windowheight):
     # Initialize the window
     master = Tk()
     # Give it a title
     master.title("RPG Storyteller")
     # Initialize the canvas to put stuff on it
-    w = Canvas(master, width=width, height=height)
+    w = Canvas(master, width=windowwidth, height=windowheight)
     w.pack()
     return w

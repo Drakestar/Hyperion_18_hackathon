@@ -6,7 +6,10 @@ import drawing
 
 def main():
     # Create and initialize window from drawing file
-    w = drawing.init()
+    w = drawing.init(700, 700)
+
+    # Calls to draw file
+    
     # Main loop
     w.mainloop()
 
