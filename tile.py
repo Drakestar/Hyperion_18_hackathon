@@ -1,6 +1,6 @@
 class Tile:
     coordinate = (-1, -1)
-    terrain = "deep ocean"
+    terrain = "saltwaterdeep"
     population = 0
     owner = "wild"
 
@@ -18,7 +18,7 @@ def generate_tilemap(map_scale: int):
     for y in range(map_scale):
         submap = []
         for x in range(map_scale):
-            submap.append(Tile((x, y), "deep ocean", 0, "wild"))
+            submap.append(Tile((x, y), "saltwaterdeep", 0, "wild"))
         tilemap.append(submap)
 
     return tilemap
