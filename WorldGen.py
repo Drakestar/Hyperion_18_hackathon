@@ -38,5 +38,5 @@ def generate_terrain(world_map):
 
 
 def get_neighbors(world_map, tile):
-    neighbors = [world_map[tile[0] - 2][tile[1] - 1], world_map[tile[0] - 1][tile[1] - 2]]
+    neighbors = [world_map[tile.coordinate[0] - 2][tile.coordinate[1] - 1], world_map[tile.coordinate[0] - 1][tile.coordinate[1] - 2]]
     return neighbors
