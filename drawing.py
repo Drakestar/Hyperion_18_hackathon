@@ -1,3 +1,7 @@
+import tkinter
+from tkinter import Tk, Canvas
+
+
 def terrain_color(terrain_name):
     return {
         'mountain': "grey",
@@ -11,6 +15,7 @@ def terrain_color(terrain_name):
         "desert": "goldenrod1",
         "swamp": "#3D9140",
     }[terrain_name]
+
 
 def draw_map(tiles, width, height, window):
     x1 = 0
@@ -26,3 +31,16 @@ def draw_map(tiles, width, height, window):
         y1 = y2
         x1 = 0
         x2 = 0
+
+
+def init():
+    width = 700
+    height = 700
+    # Initialize the window
+    master = Tk()
+    # Give it a title
+    master.title("RPG Storyteller")
+    # Initialize the canvas to put stuff on it
+    w = Canvas(master, width=width, height=height)
+    w.pack()
+    return w
