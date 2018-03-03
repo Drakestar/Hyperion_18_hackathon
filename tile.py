@@ -3,12 +3,14 @@ class Tile:
     terrain = "saltwaterdeep"
     population = 0
     owner = "wild"
+    contains = "empty"
 
-    def __init__(self, coordinate: (int, int), terrain: str, population: int, owner: str):
+    def __init__(self, coordinate: (int, int), terrain: str, population: int, owner: str, contains: str):
         self.coordinate = coordinate
         self.terrain = terrain
         self.population = population
         self.owner = owner
+        self.contains = contains
 
 
 def generate_tilemap(map_scale: int):
