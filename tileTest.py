@@ -16,5 +16,5 @@ for row in world_map:
 WorldGen.generate_terrain(world_map)
 
 w = drawing.init(720, 720)
-drawing.draw_map(world_map, 720, 720, w)
+drawing.draw_map(world_map, w)
 w.mainloop()
