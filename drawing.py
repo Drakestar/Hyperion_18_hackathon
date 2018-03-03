@@ -1,28 +1,26 @@
-import tkinter
-from tkinter import Tk, Canvas
+import pygame
+import constants
 
 
 # Given a terrain name it will return a color to be used
 def terrain_color(terrain_name):
     return {
-        'mountain': "grey",
-        'grassland': "green",
-        "forest": "forestgreen",
-        "hills": '#FF9912',
-        "freshwaterdeep": "darkslategray2",
-        "freshwatershallow": "darkslategray1",
-        "saltwatershallow": "deepskyblue2",
-        "saltwaterdeep": "deepskyblue3",
-        "desert": "goldenrod1",
-        "swamp": "#3D9140",
+        'mountain': constants.MOUNTAIN,
+        'grassland': constants.GRASSLAND,
+        "forest": constants.FOREST,
+        "hills": constants.HILLS,
+        "freshwaterdeep": constants.FRESHDEEP,
+        "freshwatershallow": constants.FRESHSHALLOW,
+        "saltwatershallow": constants.SALTSHALLOW,
+        "saltwaterdeep": constants.SALTDEEP,
+        "desert": constants.DESERT,
+        "swamp": constants.SWAMP,
     }[terrain_name]
 
 
 # Draws the map given the tileset, window details, and window itself
-def draw_map(tiles, window):
-    window.update()
-    windowwidth = window.winfo_width()
-    windowheight = window.winfo_height()
+def draw_map(tiles, display):
+    windowwidth, windowheight = pygame.display.get_surface().get_size()
     # Set Square corners to 0
     x1 = y1 = x2 = y2 = 0
     # Go through each row of the tileset
@@ -34,22 +32,10 @@ def draw_map(tiles, window):
             # Advance the location of the bottom right corner of square
             x2 += windowwidth / len(row)
             # Create the rectangle with no outline on squares
-            window.create_rectangle(x1, y1, x2, y2, fill=terrain_color(column.terrain), outline="")
+            pygame.draw.rect(display, terrain_color(column.terrain), (x1, y1, x2, y2))
             # Set the left corner to right corner x
             x1 = x2
         # Advance y to go down
         y1 = y2
         # Reset x location of boxes
         x1 = x2 = 0
-
-
-# Create and return a window given height and width
-def init(windowwidth, windowheight):
-    # Initialize the window
-    master = Tk()
-    # Give it a title
-    master.title("RPG Storyteller")
-    # Initialize the canvas to put stuff on it
-    w = Canvas(master, width=windowwidth, height=windowheight)
-    w.pack()
-    return w
