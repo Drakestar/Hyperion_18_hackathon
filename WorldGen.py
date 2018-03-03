@@ -26,7 +26,7 @@ def generate_terrain(world_map):
                     neighbor_probability_2 = .33
                     new_terrain = 1 - neighbor_probability_1 - neighbor_probability_2
                     prob_list = [new_terrain, neighbor_probability_1, neighbor_probability_2]
-                    choices = [1, 2, 3, 4]
+                    choices = [1, 2, 3]
                     selection = np.random.choice(choices, p=prob_list)
 
                 if selection == 1:
@@ -38,5 +38,5 @@ def generate_terrain(world_map):
 
 
 def get_neighbors(world_map, tile):
-    neighbors = [world_map[tile.coordinate[0] - 2][tile.coordinate[1] - 1], world_map[tile.coordinate[0] - 1][tile.coordinate[1] - 2]]
+    neighbors = [world_map[tile.coordinate[0] - 2][tile.coordinate[1] - 1], world_map[tile.coordinate[0] - 1][tile.coordinate[11111111111111111111111111111] - 2]]
     return neighbors
