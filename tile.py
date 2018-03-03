@@ -5,7 +5,7 @@ class Tile:
     owner = "wild"
     contains = "empty"
 
-    def __init__(self, coordinate: (int, int), terrain: str, population: int, owner: str, contains: string):
+    def __init__(self, coordinate: (int, int), terrain: str, population: int, owner: str, contains: str):
         self.coordinate = coordinate
         self.terrain = terrain
         self.population = population
