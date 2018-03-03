@@ -19,7 +19,10 @@ def terrain_color(terrain_name):
 
 
 # Draws the map given the tileset, window details, and window itself
-def draw_map(tiles, windowwidth, windowheight, window):
+def draw_map(tiles, window):
+    window.update()
+    windowwidth = window.winfo_width()
+    windowheight = window.winfo_height()
     # Set Square corners to 0
     x1 = y1 = x2 = y2 = 0
     # Go through each row of the tileset
