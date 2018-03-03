@@ -21,7 +21,7 @@ def terrain_color(terrain_name):
 # Draws the map given the tileset, window details, and window itself
 def draw_map(tiles, windowwidth, windowheight, window):
     # Set Square corners to 0
-    x1, y1, x2, y2 = 0
+    x1 = y1 = x2 = y2 = 0
     # Go through each row of the tileset
     for row in tiles:
         # The opposite corners y value updates
@@ -37,7 +37,7 @@ def draw_map(tiles, windowwidth, windowheight, window):
         # Advance y to go down
         y1 = y2
         # Reset x location of boxes
-        x1, x2 = 0
+        x1 = x2 = 0
 
 
 # Create and return a window given height and width
