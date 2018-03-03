@@ -20,7 +20,7 @@ def generate_tilemap(map_scale: int):
     for y in range(map_scale):
         submap = []
         for x in range(map_scale):
-            submap.append(Tile((x, y), "saltwaterdeep", 0, "wild"))
+            submap.append(Tile((x, y), "saltwaterdeep", 0, "wild", "empty"))
         tilemap.append(submap)
 
     return tilemap
