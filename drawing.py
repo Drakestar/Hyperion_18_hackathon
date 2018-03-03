@@ -1,6 +1,9 @@
 import tkinter
 from tkinter import Tk, Canvas
 
+width = 700
+height = 700
+
 
 def terrain_color(terrain_name):
     return {
@@ -34,8 +37,6 @@ def draw_map(tiles, width, height, window):
 
 
 def init():
-    width = 700
-    height = 700
     # Initialize the window
     master = Tk()
     # Give it a title
