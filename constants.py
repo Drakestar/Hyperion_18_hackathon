@@ -20,7 +20,7 @@ YELLOW = (255, 255, 0)
 SQUAREOFTRUTH = (701, 0, 1000, 700)
 WORLDSIZE = 50
 CIVS = 4
-TURNS = 25
+TURNS = 10
 WIDTH = 700
 HEIGHT = 700
 # Used for showing the terrain to make it look better
