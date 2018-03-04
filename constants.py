@@ -21,3 +21,13 @@ SQUAREOFTRUTH = (701, 0, 1000, 700)
 WORLDSIZE = 60
 WIDTH = 700
 HEIGHT = 700
+terraindict = {'mountain': "Mountain",
+               'grassland': "Grassland",
+               "forest": "Forest",
+               "hills": "Hills",
+               "freshwaterdeep": "Deep Freshwater",
+               "freshwatershallow": "Shallow Freshwater",
+               "saltwatershallow": "Shallow Saltwater",
+               "saltwaterdeep": "Deep Saltwater",
+               "desert": "Desert",
+               "swamp": "Swamp"}
