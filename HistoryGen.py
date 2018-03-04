@@ -27,7 +27,8 @@ def update_city_influence(kingdom_name, location, world_map, influence):
     for x in range(-influence, influence + 1):
         for y in range(-influence, influence + 1):
             try:
-                world_map[location[0] + x][location[1] + y].owner = kingdom_name
+                if location[0] + x >= 0 and location[1] + y >= 0:
+                    world_map[location[0] + x][location[1] + y].owner = kingdom_name
             except IndexError:
                 pass
 
