@@ -12,13 +12,13 @@ class Civilization:
         self.total_population = total_population
         self.holdings_list = holdings_list
 
-    def take_actions(self, map):
+    def take_actions(self, world_map):
         expand_list = []
         for holding in self.holdings_list:
-            location = holding.find_valid_neighbor(map)
+            location = holding.find_valid_neighbor(world_map)
             city = holding.take_action(location)
             if city is not None:
-                map[location[0]][location[1]].contains.append(city.type)
+                world_map[location[0]][location[1]].contains.append(city.type)
                 expand_list.append(city)
             self.total_population += holding.population
 
@@ -91,9 +91,9 @@ class Holding:
         influence = self.influence
         for x in range(-influence, influence + 1):
             for y in range(-influence, influence + 1):
-                if x == -influence or x == influcence + 1 or y == influence or y == influence + 1:
+                if x == -influence or x == influence + 1 or y == influence or y == influence + 1:
                     try:
-                       neighbors_list.append(world_map[self.location[0] + x][slef.location[1] + y])
+                        neighbors_list.append(world_map[self.location[0] + x][self.location[1] + y])
                     except IndexError:
                         pass
         for n in neighbors_list:
@@ -101,7 +101,7 @@ class Holding:
                 neighbors_list.remove(n)
         if len(neighbors_list) > 0:
             return neighbors_list[
-                np.random.random_integers(0, len(neighbors_list) - 1)]  # gets random selection from the
+                np.random.random_integers(0, len(neighbors_list) - 1)].coordinate  # gets random selection from the
         else:
             return None
     # location list
