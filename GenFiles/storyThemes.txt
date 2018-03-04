@@ -2,8 +2,9 @@ Save <ALLY> from <ENEMY>
 Find <ALLY>
 Protect <ALLY>
 Find <ITEM>
-Take <ITEM> from <ENEMEY>
+Take <ITEM> from <ENEMY>
 Kill <ENEMY>
 Rescue <ALLY>
 Steal <ITEM>
 Destroy <ITEM>
+Kidnap <ENEMY> on the orders of <ALLY>
