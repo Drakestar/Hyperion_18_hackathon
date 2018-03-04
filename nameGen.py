@@ -31,7 +31,7 @@ def get_city_name():
 
 
 def get_civilization_name():
-    return "Here's your name Jacob"
+    return (random.choice(open("civilizationNames.txt", "r").readlines())).replace("\n", "")
 
 
 

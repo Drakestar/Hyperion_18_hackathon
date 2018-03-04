@@ -9,4 +9,6 @@ print(tiles.owner)
 world_map = tile.generate_tilemap(20)
 
 while True:
-    print(nameGen.get_first_name_human_female())
+    print(nameGen.get_civilization_name())
+    print(nameGen.get_city_name())
+    print()
