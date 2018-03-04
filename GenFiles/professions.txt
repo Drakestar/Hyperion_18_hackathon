@@ -1,6 +1,219 @@
-temp profession 1
-temp profession 2
-temp profession 3
-temp profession 4
-temp profession 5
-temp profession 6
+cowherd
+dairymaid
+dung carter
+farmer
+gardener
+goatherd
+horse trainer
+peasant
+reaper
+sheepshearer
+shepherd
+woodcutter
+woolcomber
+falconer
+gamekeeper
+hunter
+molecatcher
+trapper
+fisherman
+artist
+glasspainter
+painter
+sculptor
+composer
+illuminator
+playwright
+poet
+writer
+shoemaker
+tailor
+jeweler
+pastrycook
+mason
+carpenter
+weaver
+chandler
+baker
+hatmaker
+saddler
+chicken butcher
+meat butcher
+buckle maker
+blacksmith
+roofer
+locksmith
+ropemaker
+tanner
+harness maker
+glover
+bottelier
+cobbler
+armorsmith
+arrowsmith
+bladesmith
+bowyer
+fletcher
+knifesmith
+swordsmith
+weaponsmith
+blacksmith's striker
+foundryman
+goldbeater
+tinker
+woodcarver
+weaver
+tapestrymaker
+stonecarver
+roofer
+papermaker
+nailmaker
+miner
+master builder
+architect
+arkwright
+basketmaker
+beekeeper
+beerbrewer
+bonecarver
+bookbinder
+brewer
+bricklayer
+cabinetmaker
+calligrapher
+carpenter
+cartographer
+cartwright
+clockmaker
+clothier
+compasssmith
+confectioner
+drywaller
+dyer
+embroiderer
+furniture maker
+gemcutter
+glassblower
+gravedigger
+guild Master
+jeweler
+lanternmaker
+mailer
+bandit
+boothaler
+burglar
+cutpurse
+fence
+pickpocket
+poacher
+camp follower
+courtesan
+prostitute
+stewsman
+bard
+fiddler
+harper
+lutenist
+musician
+piper
+singer
+actor
+bard
+dancer
+fool
+jester
+juggler
+storyteller
+troubadour
+tumbler
+bailiff
+captain of the guard
+chamberlain
+chancellor
+cofferer
+constable
+diplomat
+emperor
+herald
+jailer
+judge
+king
+knight
+landlord
+marshal
+noble
+sheriff
+steward
+tax Collector
+toll Keeper
+town Crier
+treasurer
+watchman
+apothecary
+banker
+fishmonger
+fruitier
+grocer
+hay merchant
+innkeeper
+oil merchant
+old-clothes dealer
+peddler
+skinner
+waterseller
+wine seller
+wood seller
+archer
+bodyguard
+bowman
+captain
+crossbowman
+drummer
+guardsman
+halberdier
+mercenary
+militia
+pikeman
+scout
+spy
+spearman
+viking
+watchman
+sapper
+siege engineer
+camp cook
+camp follower
+abbot
+almoner
+archbishop
+bishop
+priest
+clerk
+hermit
+monk
+nun
+pilgrim
+pope
+priest
+theologian
+alchemist
+apothecary
+astrologer
+dean
+herbalist
+librarian
+mathematician
+philosopher
+professor
+scribe
+
+
+
+
+, Barber-Chirurgeon, , , , porter, doctor, bather (profession), copyist
+
+maidservant
+water carrier
+laundress
+
+

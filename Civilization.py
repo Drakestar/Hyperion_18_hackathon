@@ -63,7 +63,8 @@ class Holding:
     def expand(self, location):
         self.population -= 20
         print(self.name, 'expanded, population = ', self.population)
-        return Holding(nameGen.get_city_name(), 'village', 20,0,location)
+        # self, name: str, type: str, population: int, is_capital: bool, influence: int, location: (int, int)
+        return Holding(nameGen.get_city_name(), 'village', 20, False, 0, location)
 
     def take_action(self,location):
         if self.population < 100:
