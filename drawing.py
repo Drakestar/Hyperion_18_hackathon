@@ -1,5 +1,7 @@
 import pygame
+import random
 import constants
+import questGen
 
 # Load all the images
 # Made by Delapouite under CC BY 3.0 on game-icons.net
@@ -107,6 +109,17 @@ def set_influence_colors(tiles):
     return owners
 
 
+# Creates a list of all towns
+def get_town_list(tiles):
+    town_list = []
+    for row in tiles:
+        for col in row:
+            if col.owner != "wild":
+                for x in col.contains:
+                    town_list.append([x.name, x.location])
+    return town_list
+
+
 def influence_borders(tiles, row, col):
     border_draws = []
     cur_owner = tiles[row][col].owner
@@ -183,17 +196,6 @@ class Block(pygame.sprite.Sprite):
         # of rect.x and rect.y
         self.rect = self.image.get_rect()
 
-    def update(self):
-        # Get the current mouse position. This returns the position
-        # as a list of two numbers.
-        pos = pygame.mouse.get_pos()
-
-        # Fetch the x and y out of the list,
-        # just like we'd fetch letters out of a string.
-        # Set the player object to the mouse location
-        self.rect.x = pos[0]
-        self.rect.y = pos[1]
-
 
 # Given the width and height, and the amount of tiles, can return the indice of where a user clicks
 def get_indices(screenwidth, screenheight, tile_amount):
@@ -203,9 +205,9 @@ def get_indices(screenwidth, screenheight, tile_amount):
     mouse_y = int(mouse_y / (screenheight / tile_amount))
     # If the mouse click is passed the furthest tile
     if mouse_x > tile_amount:
-        mouse_x = tile_amount - 1
+        mouse_x = tile_amount
     if mouse_y > tile_amount:
-        mouse_y = tile_amount - 1
+        mouse_y = tile_amount
     return mouse_x, mouse_y
 
 
@@ -216,7 +218,6 @@ def tile_info(tile):
     # Render the fields text and append them to the label list
     label_list.append(myfont.render("Owner: " + tile.owner, 1, (0, 0, 0)))
     label_list.append(myfont.render("Terrain: " + constants.terraindict[tile.terrain], 1, (0, 0, 0)))
-    label_list.append(myfont.render("Contains:", 1, (0, 0, 0)))
     for x in tile.contains:
         label_list.append(myfont.render("City: " + x.name, 1, (0, 0, 0)))
         label_list.append(myfont.render("Population: " + str(x.population), 1, (0, 0, 0)))
@@ -240,4 +241,20 @@ def yes_labels():
     label2 = myfont.render("Regenerate", 1, (0, 0, 0))
     label_list.append(label1)
     label_list.append(label2)
+    return label_list
+
+
+def draw_hooks(display, town_list):
+    label_list = []
+    myfont = pygame.font.SysFont("monospace", 15)
+    town1 = random.choice(town_list)
+    town2 = random.choice(town_list)
+    hook = questGen.get_hook()
+    hook = hook.replace("<SETTLEMENT1>", town1[0])
+    hook = hook.replace("<SETTLEMENT2>", town2[0])
+    label_list.append(myfont.render(questGen.get_theme(), 1, constants.BLACK))
+    label_list.append(myfont.render(hook[:len(hook) // 2], 1, constants.BLACK))
+    label_list.append(myfont.render(hook[len(hook) // 2:], 1, constants.BLACK))
+    town_block = Block(constants.WHITE, 10, 10)
+    #hook = myfont.render(hooks.gethook(), 1, constants.WHITE)
     return label_list
