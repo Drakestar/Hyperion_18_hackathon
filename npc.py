@@ -1,6 +1,8 @@
 import nameGen
 import random
 import professionGen
+import numpy as np
+
 
 # Class for npc that sets as base values before being adjusted
 class Npc:
@@ -36,3 +38,15 @@ class Npc:
     def die(self):
         self.name = "The Deceased, " + self.name
         return 1
+
+
+def get_n_npcs(n):
+    npc_list = []
+
+    number = n * .075  # our own toyed with function to limit number of NPC generated
+    for i in range(0, int(round(number))):
+        npc_list.append(Npc())
+
+    return npc_list
+
+
