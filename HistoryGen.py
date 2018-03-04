@@ -13,9 +13,10 @@ def generate_civs(civ_number, world_map):
     for civ in civ_list:
         location = find_suitable_location(world_map)
         # elf, name: str, type: str, population: int, is_capital: bool, influence: int, location: (int, int)
-        civ.holdings_list.append(Civilization.Holding(nameGen.get_city_name(), 'village', civ, 20, True, 0, location))
+        holding = Civilization.Holding(nameGen.get_city_name(), 'village', civ, 20, True, 0, location)
+        civ.holdings_list.append(holding)
         world_map[location[0]][location[1]].owner = civ.name
-        world_map[location[0]][location[1]].contains.append("village")
+        world_map[location[0]][location[1]].contains.append(holding)
         update_city_influence(civ.name, location, world_map, 0)
 
     return civ_list
