@@ -47,8 +47,6 @@ def get_n_npcs(n):
     for i in range(0, int(round(number))):
         npc_list.append(Npc())
 
-    for npc in npc_list:
-        print(npc.name, 'the', npc.profession)
-    print(len(npc_list))
+    return npc_list
 
 
