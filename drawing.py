@@ -234,9 +234,9 @@ def draw_text(display, label_list):
 # Returns the label list for Yes/no
 def yes_labels():
     label_list = []
-    myfont = pygame.font.SysFont("monospace", 250)
-    label1 = myfont.render("YES", 1, (0, 0, 0))
-    label2 = myfont.render("NO", 1, (0, 0, 0))
+    myfont = pygame.font.SysFont("monospace", 50)
+    label1 = myfont.render("Continue", 1, (0, 0, 0))
+    label2 = myfont.render("Regenerate", 1, (0, 0, 0))
     label_list.append(label1)
     label_list.append(label2)
     return label_list
