@@ -1,3 +1,5 @@
+from numpy import random
+
 import numpy as np
 
 
@@ -16,6 +18,26 @@ def generate_terrain(world_map):
             # Check if edge and turn into Deep saltwater
             if tile.coordinate[0] == 0 or tile.coordinate[1] == 0 or tile.coordinate[0] == size or tile.coordinate[1] == size:
                 tile.terrain = 'saltwaterdeep'
+            elif tile.coordinate[0] < int(size / 20) or tile.coordinate[1] < int(size / 20) or tile.coordinate[0] > size - int(size / 20) or tile.coordinate[1] > size - int(size / 20):
+                choices = [0, 1]
+                if(random.choice(choices) == 0):
+                    tile.terrain = 'saltwaterdeep'
+                else:
+                    tile.terrain = 'saltwatershallow'
+            elif tile.coordinate[0] < int(size / 10) or tile.coordinate[1] < int(size / 10) or tile.coordinate[0] > size - int(size / 10) or tile.coordinate[1] > size - int(size / 10):
+                tile.terrain = 'saltwatershallow'
+            elif tile.coordinate[0] < int(size / 9) or tile.coordinate[1] < int(size / 9) or tile.coordinate[0] > size - int(size / 9) or tile.coordinate[1] > size - int(size / 9):
+                choices = [0, 1, 2, 3]
+                if(random.choice(choices) == 0):
+                    tile.terrain = 'desert'
+                else:
+                    tile.terrain = 'saltwatershallow'
+            elif tile.coordinate[0] < int(size / 8) or tile.coordinate[1] < int(size / 8) or tile.coordinate[0] > size - int(size / 8) or tile.coordinate[1] > size - int(size / 8):
+                choices = [0, 1, 2]
+                if(random.choice(choices) != 0):
+                    tile.terrain = 'desert'
+                else:
+                    tile.terrain = 'saltwatershallow'
             # Otherwise the terrain is in the center
             else:
                 # Get list of neighbors that have already been made
@@ -53,7 +75,7 @@ def generate_terrain(world_map):
                 if selection == 1:
                     # Do another selection to do a random new exotic terrain
                     rarity = [1, 2]
-                    selection2 = np.random.choice(rarity, p=[1-exotic_probability, exotic_probability])
+                    selection2 = np.random.choice(rarity, p=[1 - exotic_probability, exotic_probability])
                     if selection2 == 1:
                         tile.terrain = terrain_list[np.random.random_integers(0, 10000000) % 7]
                     else:
