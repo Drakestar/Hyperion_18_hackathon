@@ -88,25 +88,25 @@ class Holding:
         inf = self.influence  # need influence to check the proper tiles
         neighbors_list = []
         try:
-            north = map[x_position][y_position + inf].owner
+            north = world_map[x_position][y_position + inf].owner
             if north == 'wild':
                 neighbors_list.append((x_position, y_position + inf))
         except IndexError:
             north = None
         try:
-            south = map[x_position][y_position - inf].owner
+            south = world_map[x_position][y_position - inf].owner
             if south == 'wild':
                 neighbors_list.append((x_position, y_position - inf))
         except IndexError:
             south = None
         try:
-            east = map[x_position + inf][y_position].owner
+            east = world_map[x_position + inf][y_position].owner
             if east == 'wild':
                 neighbors_list.append((x_position + inf, y_position))
         except IndexError:
             east = None
         try:
-            west = map[x_position - inf][y_position].owner
+            west = world_map[x_position - inf][y_position].owner
             if west == 'wild':
                 neighbors_list.append((x_position - inf, y_position))
         except IndexError:
