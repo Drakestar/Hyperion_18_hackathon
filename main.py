@@ -4,6 +4,7 @@ from pygame.locals import *
 import sys
 # File imports
 import constants
+import HistoryGen
 import tile
 import WorldGen
 import drawing
@@ -25,7 +26,7 @@ def main():
     loop_var = True
     while loop_var:
         # Draw map, and option squares
-        drawing.draw_map(tile_map, display)
+        drawing.draw_geography(tile_map, display)
         pygame.draw.rect(display, constants.GRAY, constants.SQUAREOFTRUTH)
         display.blit(label_list[0], (790, 140))
         display.blit(label_list[1], (800, 490))
@@ -47,10 +48,12 @@ def main():
         pygame.display.update()
     # Clear the yes/no labels
     label_list.clear()
-    # Main "game" loop
+    HistoryGen.start_making_history(10, 4, tile_map)
+    # Main "game" loop, where the user can inspect specific squares
     while True:
         # Draw map
-        drawing.draw_map(tile_map, display)
+        drawing.draw_geography(tile_map, display)
+        drawing.draw_civilization(tile_map, display)
         pygame.draw.rect(display, constants.GRAY, constants.SQUAREOFTRUTH)
         # Look through all events
         for event in pygame.event.get():
