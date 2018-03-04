@@ -22,7 +22,9 @@ def main():
     WorldGen.generate_terrain(tile_map)
     # Variables
     label_list = drawing.yes_labels()
-    # Loop through until the user is happy with the map
+    # --------------------------------------------
+    # -------------- MAP -------------------------
+    # --------------------------------------------
     loop_var = True
     while loop_var:
         # Draw map, and option squares
@@ -50,6 +52,9 @@ def main():
     backup_map = copy.deepcopy(tile_map)
     HistoryGen.start_making_history(constants.TURNS, constants.CIVS, tile_map)
     owner_list = drawing.set_influence_colors(tile_map)
+    # ----------------------------------------
+    # -----------------HISTORY ---------------
+    # ----------------------------------------
     # Loop through until the user is happy with the map
     loop_var = True
     while loop_var:
@@ -80,6 +85,10 @@ def main():
         pygame.display.update()
     # Clear the yes/no labels, generate a history given the tile_map and develop the owners of the colors
     label_list.clear()
+    town_list = drawing.get_town_list(tile_map)
+    # ----------------------------------
+    # -------------MAIN LOOP -----------
+    # ----------------------------------
     # Main "game" loop, where the user can inspect specific squares
     while True:
         # Draw geography, civilizations, influence, then the info box
@@ -96,7 +105,11 @@ def main():
             # User clicks a square it gives information
             if event.type == MOUSEBUTTONDOWN:
                 tile_x, tile_y = drawing.get_indices(constants.WIDTH, constants.HEIGHT, len(tile_map))
-                label_list = drawing.tile_info(tile_map[tile_y][tile_x])
+                if tile_y >= len(tile_map) or tile_x >= len(tile_map):
+                    # Generate hook
+                    label_list = drawing.draw_hooks(display, town_list)
+                else:
+                    label_list = drawing.tile_info(tile_map[tile_y][tile_x])
         # Draw the text when tile clicked
         drawing.draw_text(display, label_list)
         pygame.display.update()
