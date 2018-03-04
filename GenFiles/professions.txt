@@ -206,14 +206,27 @@ mathematician
 philosopher
 professor
 scribe
-
-
-
-
-, Barber-Chirurgeon, , , , porter, doctor, bather (profession), copyist
-
+barber
 maidservant
 water carrier
 laundress
-
-
+butler
+accountant
+bath attendant
+dog trainer
+scribe
+food taster
+doctor
+servant
+slave
+indentured servant
+stablehand
+stablemaster
+quartermaster
+privycleaner
+soliciter
+dab master
+witch doctor
+courier
+ditch digger
+wetnurse
