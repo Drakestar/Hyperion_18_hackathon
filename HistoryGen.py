@@ -8,16 +8,16 @@ def generate_civs(civ_number):
         civ_list.append(Civilization.Civilization(nameGen.get_civilization_name(), 20, []))
 
     for civ in civ_list:
-        civ.holdings_list.append(Civilization.Holding(nameGen.get_city_name(),'village',20))
+        civ.holdings_list.append(Civilization.Holding(nameGen.get_city_name(),'village',20,True,3))
     return civ_list
 
 
-def start_making_history(turns, civs):
+def start_making_history(turns, civs, map):
     civilizations = generate_civs(civs)
 
     for i in range(turns):
         for civ in civilizations:
-            civ.take_actions()
+            civ.take_actions(map)
 
     for civ in civilizations:
         print('Name:',civ.name)
