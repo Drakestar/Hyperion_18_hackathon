@@ -252,9 +252,12 @@ def draw_hooks(display, town_list):
     hook = questGen.get_hook()
     hook = hook.replace("<SETTLEMENT1>", town1[0])
     hook = hook.replace("<SETTLEMENT2>", town2[0])
+    div1 = len(hook) // 4
     label_list.append(myfont.render(questGen.get_theme(), 1, constants.BLACK))
-    label_list.append(myfont.render(hook[:len(hook) // 2], 1, constants.BLACK))
-    label_list.append(myfont.render(hook[len(hook) // 2:], 1, constants.BLACK))
+    label_list.append(myfont.render(hook[:div1], 1, constants.BLACK))
+    label_list.append(myfont.render(hook[div1:div1+div1], 1, constants.BLACK))
+    label_list.append(myfont.render(hook[div1+div1:div1+div1+div1], 1, constants.BLACK))
+    label_list.append(myfont.render(hook[div1+div1+div1:div1+div1+div1+div1], 1, constants.BLACK))
     town_block = Block(constants.WHITE, 10, 10)
     #hook = myfont.render(hooks.gethook(), 1, constants.WHITE)
     return label_list
