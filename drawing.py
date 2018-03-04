@@ -1,6 +1,11 @@
 import pygame
 import constants
 
+village = pygame.image.load('images/hut.png')
+town = pygame.image.load('images/cabin.png')
+city = pygame.image.load('images/village.png')
+metropolis = pygame.image.load('images/castle.png')
+
 
 # Given a terrain name it will return a color to be used
 def terrain_color(terrain_name):
@@ -19,19 +24,17 @@ def terrain_color(terrain_name):
 
 
 # Draws the map given the tileset, window details, and window itself
-def draw_map(tiles, display):
-    windowwidth, windowheight = pygame.display.get_surface().get_size()
-    windowwidth -= 300
+def draw_geography(tiles, display):
     # Set Square corners to 0
     x1 = y1 = x2 = y2 = 0
     # Go through each row of the tileset
     for row in tiles:
         # The opposite corners y value updates
-        y2 += windowheight / len(tiles)
+        y2 += constants.HEIGHT / len(tiles)
         # Go through every column in the row
         for column in row:
             # Advance the location of the bottom right corner of square
-            x2 += windowwidth / len(row)
+            x2 += constants.WIDTH / len(row)
             # Create the rectangle with no outline on squares
             pygame.draw.rect(display, terrain_color(column.terrain), (x1, y1, x2, y2))
             # Set the left corner to right corner x
@@ -40,6 +43,39 @@ def draw_map(tiles, display):
         y1 = y2
         # Reset x location of boxes
         x1 = x2 = 0
+
+
+def draw_civilization(tiles, display):
+    # Resize the images based on number of tiles
+    width = int(constants.WIDTH / len(tiles))
+    height = int(constants.HEIGHT / len(tiles))
+    resizey = (width, height)
+    villages = pygame.transform.scale(village, resizey)
+    towns = pygame.transform.scale(town, resizey)
+    citys = pygame.transform.scale(city, resizey)
+    metropoliss = pygame.transform.scale(metropolis, resizey)
+    # Set Square corners to 0
+    x1 = y1 = 0
+    # Go through each row of the tileset
+    for row in tiles:
+        # Go through every column in the row
+        for column in row:
+            # Create the rectangle with no outline on squares
+            for x in column.contains:
+                if x == "village":
+                    display.blit(villages, (x1, y1))
+                elif x == "town":
+                    display.blit(towns, (x1, y1))
+                elif x == "city":
+                    display.blit(citys, (x1, y1))
+                elif x == "metropolis":
+                    display.blit(metropoliss, (x1, y1))
+            # Set the left corner to right corner x
+            x1 += constants.WIDTH / len(row)
+        # Advance y to go down
+        x1 = 0
+        y1 += constants.HEIGHT / len(tiles)
+        # Reset x location of boxes
 
 
 class Block(pygame.sprite.Sprite):
@@ -90,14 +126,12 @@ def tile_info(tile):
     myfont = pygame.font.SysFont("monospace", 25)
     label_list = []
     # Render the fields text and append them to the label list
-    label1 = myfont.render("Owner: " + tile.owner, 1, (0, 0, 0))
-    label2 = myfont.render("Terrain: " + tile.terrain, 1, (0, 0, 0))
-    label3 = myfont.render("Population: " + str(tile.population), 1, (0, 0, 0))
-    label4 = myfont.render("Contains: " + tile.contains, 1, (0, 0, 0))
-    label_list.append(label1)
-    label_list.append(label2)
-    label_list.append(label3)
-    label_list.append(label4)
+    label_list.append(myfont.render("Owner: " + tile.owner, 1, (0, 0, 0)))
+    label_list.append(myfont.render("Terrain: " + tile.terrain, 1, (0, 0, 0)))
+    label_list.append(myfont.render("Population: " + str(tile.population), 1, (0, 0, 0)))
+    label_list.append(myfont.render("Contains:", 1, (0, 0, 0)))
+    for x in tile.contains:
+        label_list.append(myfont.render(str(x), 1, (0, 0, 0)))
     return label_list
 
 
