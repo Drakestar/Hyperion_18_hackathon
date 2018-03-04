@@ -29,11 +29,11 @@ class Holding:
     name = 'null'
     type = 'village'
     population = 0
-    is_capital = false
+    is_capital = False
     influence = 0
     location = (0, 0)
 
-    def __init__(self, name: str, type: str, population: int, is_capital: bool, influence: int, location: pair):
+    def __init__(self, name: str, type: str, population: int, is_capital: bool, influence: int, location: tuple):
         self.name = name
         self.population = population
         self.type = type
@@ -112,7 +112,7 @@ class Holding:
         except IndexError:
             west = None
 
-        return neighbors_list[random.random_integers(0, len(neighbors_list) - 1)]  # gets random selection from the
+        return neighbors_list[np.random.random_integers(0, len(neighbors_list) - 1)]  # gets random selection from the
     # location list
 
 
