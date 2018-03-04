@@ -13,6 +13,6 @@ BLACK = (0, 0, 0)
 GRAY = (200, 200, 200)
 # The gray box on the side
 SQUAREOFTRUTH = (701, 0, 1000, 700)
-WORLDSIZE = 40
+WORLDSIZE = 50
 WIDTH = 700
 HEIGHT = 700

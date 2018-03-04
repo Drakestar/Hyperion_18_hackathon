@@ -48,12 +48,14 @@ def main():
         pygame.display.update()
     # Clear the yes/no labels
     label_list.clear()
-    HistoryGen.start_making_history(10, 4, tile_map)
+    HistoryGen.start_making_history(25, 5, tile_map)
+    owner_list = drawing.set_influence_colors(tile_map)
     # Main "game" loop, where the user can inspect specific squares
     while True:
         # Draw map
         drawing.draw_geography(tile_map, display)
         drawing.draw_civilization(tile_map, display)
+        drawing.draw_influence(tile_map, display, owner_list)
         pygame.draw.rect(display, constants.GRAY, constants.SQUAREOFTRUTH)
         # Look through all events
         for event in pygame.event.get():

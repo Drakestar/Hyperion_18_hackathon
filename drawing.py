@@ -1,10 +1,16 @@
 import pygame
 import constants
 
+# Load all the images
 village = pygame.image.load('images/hut.png')
 town = pygame.image.load('images/cabin.png')
 city = pygame.image.load('images/village.png')
 metropolis = pygame.image.load('images/castle.png')
+red_tran = pygame.image.load('images/red.png')
+teal_tran = pygame.image.load('images/teal.png')
+orange_tran = pygame.image.load('images/orange.png')
+purple_tran = pygame.image.load('images/purple.png')
+yellow_tran = pygame.image.load('images/yellow.png')
 
 
 # Given a terrain name it will return a color to be used
@@ -45,11 +51,14 @@ def draw_geography(tiles, display):
         x1 = x2 = 0
 
 
+# Draws specific pngs to tiles that have civilization on them
 def draw_civilization(tiles, display):
     # Resize the images based on number of tiles
     width = int(constants.WIDTH / len(tiles))
     height = int(constants.HEIGHT / len(tiles))
+    # Lazy made a tuple rather than calling (width, height) everytime
     resizey = (width, height)
+    # Linter got mad when i tried to shadow the outerscope names
     villages = pygame.transform.scale(village, resizey)
     towns = pygame.transform.scale(town, resizey)
     citys = pygame.transform.scale(city, resizey)
@@ -72,7 +81,49 @@ def draw_civilization(tiles, display):
                     display.blit(metropoliss, (x1, y1))
             # Set the left corner to right corner x
             x1 += constants.WIDTH / len(row)
-        # Advance y to go down
+        # Advance y to go down and reset x
+        x1 = 0
+        y1 += constants.HEIGHT / len(tiles)
+        # Reset x location of boxes
+
+
+# Given a tile_map will return a dictionary with assigned owners:influence color also resizes the color picture
+def set_influence_colors(tiles):
+    owners = {}
+    # Resize color pngs
+    width = int(constants.WIDTH / len(tiles))
+    resize = (width, width)
+    color_list = []
+    color_list.append(pygame.transform.scale(red_tran, resize))
+    color_list.append(pygame.transform.scale(teal_tran, resize))
+    color_list.append(pygame.transform.scale(orange_tran, resize))
+    color_list.append(pygame.transform.scale(purple_tran, resize))
+    color_list.append(pygame.transform.scale(yellow_tran, resize))
+    index = 0
+    # Go through map and assign colors to owners
+    for row in tiles:
+        for col in row:
+            if col.owner not in owners and col != "wild":
+                owners[col.owner] = color_list[index]
+                index += 1
+                if index >= len(color_list):
+                    index = 0
+    return owners
+
+
+def draw_influence(tiles, display, owners):
+    # Set Square corners to 0
+    x1 = y1 = 0
+    # Go through each row of the tileset
+    for row in tiles:
+        # Go through every column in the row
+        for column in row:
+            # Create the rectangle with no outline on squares
+            if column.owner != 'wild':
+                display.blit(owners[column.owner], (x1, y1))
+            # Set the left corner to right corner x
+            x1 += constants.WIDTH / len(row)
+        # Advance y to go down and reset x
         x1 = 0
         y1 += constants.HEIGHT / len(tiles)
         # Reset x location of boxes
