@@ -17,8 +17,8 @@ class Civilization:
         for holding in self.holdings_list:
             location = holding.find_valid_neighbor(map)
             city = holding.take_action(location)
-            map[location[0]][location[1]].contains.append(city)
             if city is not None:
+                map[location[0]][location[1]].contains.append(city.type)
                 expand_list.append(city)
             self.total_population += holding.population
 

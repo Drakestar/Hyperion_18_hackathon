@@ -50,7 +50,6 @@ def draw_civilization(tiles, display):
     width = int(constants.WIDTH / len(tiles))
     height = int(constants.HEIGHT / len(tiles))
     resizey = (width, height)
-    print(resizey)
     villages = pygame.transform.scale(village, resizey)
     towns = pygame.transform.scale(town, resizey)
     citys = pygame.transform.scale(city, resizey)
