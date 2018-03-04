@@ -1,9 +1,5 @@
-import time
-
 import HistoryGen
-import npc
 import tile
-import nameGen
 
 tiles = tile.Tile((0, 0), "plains", 0, "wild", "empty")
 print(tiles.owner)

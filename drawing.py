@@ -1,10 +1,16 @@
 import pygame
 import constants
 
+# Load all the images
 village = pygame.image.load('images/hut.png')
 town = pygame.image.load('images/cabin.png')
 city = pygame.image.load('images/village.png')
 metropolis = pygame.image.load('images/castle.png')
+red_tran = pygame.image.load('images/red.png')
+teal_tran = pygame.image.load('images/teal.png')
+orange_tran = pygame.image.load('images/orange.png')
+purple_tran = pygame.image.load('images/purple.png')
+yellow_tran = pygame.image.load('images/yellow.png')
 
 
 # Given a terrain name it will return a color to be used
@@ -45,11 +51,14 @@ def draw_geography(tiles, display):
         x1 = x2 = 0
 
 
+# Draws specific pngs to tiles that have civilization on them
 def draw_civilization(tiles, display):
     # Resize the images based on number of tiles
     width = int(constants.WIDTH / len(tiles))
     height = int(constants.HEIGHT / len(tiles))
+    # Lazy made a tuple rather than calling (width, height) everytime
     resizey = (width, height)
+    # Linter got mad when i tried to shadow the outerscope names
     villages = pygame.transform.scale(village, resizey)
     towns = pygame.transform.scale(town, resizey)
     citys = pygame.transform.scale(city, resizey)
@@ -72,10 +81,93 @@ def draw_civilization(tiles, display):
                     display.blit(metropoliss, (x1, y1))
             # Set the left corner to right corner x
             x1 += constants.WIDTH / len(row)
-        # Advance y to go down
+        # Advance y to go down and reset x
         x1 = 0
         y1 += constants.HEIGHT / len(tiles)
         # Reset x location of boxes
+
+
+# Given a tile_map will return a dictionary with assigned owners:influence color also resizes the color picture
+def set_influence_colors(tiles):
+    owners = {}
+    # Resize color pngs
+    width = int(constants.WIDTH / len(tiles))
+    resize = (width, width)
+    color_list = []
+    color_list.append(constants.PURPLE)
+    color_list.append(constants.RED)
+    color_list.append(constants.ORANGE)
+    color_list.append(constants.YELLOW)
+    color_list.append(constants.TEAL)
+    index = 0
+    # Go through map and assign colors to owners
+    for row in tiles:
+        for col in row:
+            if col.owner not in owners and col != "wild":
+                owners[col.owner] = color_list[index]
+                index += 1
+                if index >= len(color_list):
+                    index = 0
+    return owners
+
+
+def influence_borders(tiles, row, col):
+    border_draws = []
+    cur_owner = tiles[row][col].owner
+    # Right neighbor
+    if col != len(tiles):
+        if cur_owner != tiles[row][col + 1].owner:
+            border_draws.append(0)
+    # Left Neighbor
+    if col != 0:
+        if cur_owner != tiles[row][col - 1].owner:
+            border_draws.append(2)
+    # Up neighbor
+    if row != 0:
+        if cur_owner != tiles[row - 1][col].owner:
+            border_draws.append(1)
+    # Down neighbor
+    if row + 1 != len(tiles):
+        if cur_owner != tiles[row + 1][col].owner:
+            border_draws.append(3)
+    return border_draws
+
+
+def draw_influence(tiles, display, owners):
+    # Set Square corners to 0
+    x1 = y1 = x2 = y2 = 0
+    # Go through each row of the tileset
+    for i_x, row in enumerate(tiles):
+        # The opposite corners y value updates
+        y2 += constants.HEIGHT / len(tiles)
+        # Go through every column in the row
+        for i_y, column in enumerate(row):
+            # Advance the location of the bottom right corner of square
+            x2 += constants.WIDTH / len(row)
+            # Create the rectangle with no outline on squares
+            if column.owner != 'wild':
+                for x in influence_borders(tiles, i_x, i_y):
+                    # Draw Right
+                    if x == 0:
+                        pygame.draw.line(display, owners[column.owner], (x2, y1), (x2, y2))
+                    # Draw Up
+                    if x == 1:
+                        pygame.draw.line(display, owners[column.owner], (x1, y1), (x2, y1))
+                    # Draw left
+                    if x == 2:
+                        pygame.draw.line(display, owners[column.owner], (x1, y1), (x1, y2))
+                    # Draw down:
+                    if x == 3:
+                        pygame.draw.line(display, owners[column.owner], (x1, y2), (x2, y2))
+
+            # Set the left corner to right corner x
+            x1 = x2
+        # Advance y to go down
+        y1 = y2
+        # Reset x location of boxes
+        x1 = x2 = 0
+    # Set Square corners to 0
+    x1 = y1 = 0
 
 
 class Block(pygame.sprite.Sprite):
