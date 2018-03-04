@@ -58,15 +58,18 @@ class Holding:
             self.type = 'metropolis'
             if not self.is_capital:
                 self.influence = 3
-        print(self.name, 'is now a ', self.type, 'with a population of ', self.population)
+        print(self.name, 'is now a', self.type, 'with a population of', self.population)
 
     def expand(self, location):
         self.population -= 20
-        print(self.name, 'expanded, population = ', self.population)
+        print(self.name, 'expanded, population =', self.population)
         # self, name: str, type: str, population: int, is_capital: bool, influence: int, location: (int, int)
-        return Holding(nameGen.get_city_name(), 'village', 20, False, 0, location)
+        if location is not None:
+            return Holding(nameGen.get_city_name(), 'village', 20, False, 0, location)
+        else:
+            self.stay_put()
 
-    def take_action(self,location):
+    def take_action(self, location):
         if self.population < 100:
             self.stay_put()
         else:
@@ -113,7 +116,9 @@ class Holding:
         except IndexError:
             west = None
 
-        return neighbors_list[np.random.random_integers(0, len(neighbors_list) - 1)]  # gets random selection from the
+        if len(neighbors_list) > 0:
+            return neighbors_list[
+                np.random.random_integers(0, len(neighbors_list) - 1)]  # gets random selection from the
+        else:
+            return None
     # location list
-
-
