@@ -48,7 +48,7 @@ def main():
         pygame.display.update()
     # Generate history and then loop until user is also satisfied with that
     backup_map = copy.deepcopy(tile_map)
-    HistoryGen.start_making_history(3, 4, tile_map)
+    HistoryGen.start_making_history(10, 4, tile_map)
     owner_list = drawing.set_influence_colors(tile_map)
     # Loop through until the user is happy with the map
     loop_var = True
@@ -73,7 +73,7 @@ def main():
                 if mouse_x > 700:
                     if mouse_y > 350:
                         tile_map = copy.deepcopy(backup_map)
-                        HistoryGen.start_making_history(3, 4, tile_map)
+                        HistoryGen.start_making_history(10, 4, tile_map)
                         owner_list = drawing.set_influence_colors(tile_map)
                     else:
                         loop_var = False

@@ -47,7 +47,11 @@ class Holding:
         if selection == 0:
             self.stay_put()
         else:
-            self.expand(expand_list)
+            if self.population > 200:
+                self.expand(expand_list)
+            else:
+                self.stay_put()
+        # this needs to be done at the end of the turn not here
         self.held_by.holdings_list.extend(expand_list)
 
     def stay_put(self):
@@ -85,14 +89,17 @@ class Holding:
 
     def find_suitable_nearby_location(self, expansion_range):
         for i in range(0, 50):
-            trial_location = (random.randint(-expansion_range, expansion_range) + self.location[0], random.randint(-expansion_range, expansion_range) + self.location[1])
-            try:
-                location = self.validate_city_location(trial_location)
-            except:
-                location = None
-                # print("BAD BAD BAD")
-            if location is not None:
-                return location
+            x = random.randint(-expansion_range, expansion_range)
+            y = random.randint(-expansion_range, expansion_range)
+            trial_location = (x + self.location[0], y + self.location[1])
+            if self.location[0] + x > 0 and self.location[1] + y > 0:
+                try:
+                    location = self.validate_city_location(trial_location)
+                except:
+                    location = None
+                    # print("BAD BAD BAD")
+                if location is not None:
+                    return location
         return None
 
     def validate_city_location(self, trial_location):
