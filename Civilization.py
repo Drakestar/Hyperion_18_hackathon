@@ -76,7 +76,7 @@ class Holding:
             world_map[location[0]][location[1]].owner = self.held_by
             return Holding(nameGen.get_city_name(), 'village', 20, False, 0, location, self.held_by)
         else:
-            self.stay_put()
+            self.stay_put(world_map)
 
     def take_action(self, location, world_map):
         if self.population < 100:
@@ -90,7 +90,7 @@ class Holding:
             else:
                 selection = np.random.choice(choices, p=[.25, .75])  # 75% chance of expansion
             if selection == 1:
-                self.stay_put()
+                self.stay_put(world_map)
             else:
                 return self.expand(location, world_map)
 
