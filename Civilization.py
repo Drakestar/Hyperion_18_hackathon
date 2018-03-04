@@ -18,7 +18,7 @@ class Civilization:
         expand_list = []
         for holding in self.holdings_list:
             location = holding.find_valid_neighbor(world_map)
-            city = holding.take_action(location)
+            city = holding.take_action(location, world_map)
             if city is not None:
                 world_map[location[0]][location[1]].contains.append(city.type)
                 expand_list.append(city)
@@ -31,18 +31,20 @@ class Civilization:
 class Holding:
     name = 'null'
     type = 'village'
+    held_by = "kingdom"
     population = 0
     is_capital = False
     influence = 0
     location = (0, 0)
 
-    def __init__(self, name: str, type: str, population: int, is_capital: bool, influence: int, location: tuple):
+    def __init__(self, name: str, type: str, population: int, is_capital: bool, influence: int, location: tuple, held_by: str):
         self.name = name
         self.population = population
         self.type = type
         self.is_capital = is_capital
         self.influence = influence
         self.location = location
+        self.held_by = held_by
 
     def stay_put(self):
         exponent = np.random.random()  # random float between 0 and 1
@@ -63,16 +65,17 @@ class Holding:
                 self.influence = 3
         print(self.name, 'is now a', self.type, 'with a population of', self.population)
 
-    def expand(self, location):
+    def expand(self, location, world_map):
         self.population -= 20
         print(self.name, 'expanded, population =', self.population)
         # self, name: str, type: str, population: int, is_capital: bool, influence: int, location: (int, int)
         if location is not None:
-            return Holding(nameGen.get_city_name(), 'village', 20, False, 0, location)
+            world_map[location[0]][location[1]].owner = self.held_by
+            return Holding(nameGen.get_city_name(), 'village', 20, False, 0, location, self.held_by)
         else:
             self.stay_put()
 
-    def take_action(self, location):
+    def take_action(self, location, world_map):
         if self.population < 100:
             self.stay_put()
         else:
@@ -86,7 +89,7 @@ class Holding:
             if selection == 1:
                 self.stay_put()
             else:
-                return self.expand(location)
+                return self.expand(location, world_map)
 
     def find_valid_neighbor(self, world_map):
         neighbors_list = []
@@ -98,9 +101,12 @@ class Holding:
                         neighbors_list.append(world_map[self.location[0] + x][self.location[1] + y])
                     except IndexError:
                         pass
+
+        new_list = neighbors_list
         for n in neighbors_list:
-            if n.owner != 'wild' or n.terrain.find("water") != -1:
-                neighbors_list.remove(n)
+            if n.owner != 'wild' or n.terrain == "saltwaterdeep":
+                new_list.remove(n)
+        neighbors_list = new_list
         if len(neighbors_list) > 0:
             return neighbors_list[
                 np.random.random_integers(0, len(neighbors_list) - 1)].coordinate  # gets random selection from the
