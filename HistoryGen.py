@@ -60,6 +60,7 @@ def start_making_history(turns, civs, world_map):
         print("\n----- Generation " + str(i) + " -----")
         for civ in civilizations:
             civ.take_actions()
+            civ.commit_expansions()
 
     print("\n----- Results -----")
     for civ in civilizations:

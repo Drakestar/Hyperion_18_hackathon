@@ -8,6 +8,7 @@ class Civilization:
     name = 'null'
     total_population = 0
     holdings_list = []
+    expand_list = []
     world_map = [[]]
 
     def __init__(self, name: str, total_population: int, holdings_list: list, world_map):
@@ -20,6 +21,9 @@ class Civilization:
         print(self.name)
         for holding in self.holdings_list:
             holding.take_action()
+
+    def commit_expansions(self):
+        self.holdings_list.extend(self.expand_list)
 
 
 class Holding:
@@ -52,31 +56,39 @@ class Holding:
             else:
                 self.stay_put()
         # this needs to be done at the end of the turn not here
-        self.held_by.holdings_list.extend(expand_list)
+        self.held_by.extend_list = expand_list
 
     def stay_put(self):
         exponent = np.random.random() + .5  # random float between 0 and 1
         self.population = int(round((self.population * np.e ** exponent)))  # population growth function
         if self.population < 200:
             self.settlement_type = 'village'
+            self.held_by.world_map[self.location[0]][self.location[1]].contains = []
+            self.held_by.world_map[self.location[0]][self.location[1]].contains.append(self)
         elif self.population < 2000:
             self.settlement_type = 'town'
             self.influence = 1
+            self.held_by.world_map[self.location[0]][self.location[1]].contains = []
+            self.held_by.world_map[self.location[0]][self.location[1]].contains.append(self)
             HistoryGen.update_city_influence(self.held_by.name, self.location, self.held_by.world_map, self.influence)
         elif self.population < 20000:
             self.settlement_type = 'city'
             self.influence = 2
+            self.held_by.world_map[self.location[0]][self.location[1]].contains = []
+            self.held_by.world_map[self.location[0]][self.location[1]].contains.append(self)
             HistoryGen.update_city_influence(self.held_by.name, self.location, self.held_by.world_map, self.influence)
         else:
             self.settlement_type = 'metropolis'
             self.influence = 3
+            self.held_by.world_map[self.location[0]][self.location[1]].contains = []
+            self.held_by.world_map[self.location[0]][self.location[1]].contains.append(self)
             HistoryGen.update_city_influence(self.held_by.name, self.location, self.held_by.world_map, self.influence)
 
         print(" - " + self.name + " is growing, population = " + str(self.population))
 
     def expand(self, expand_list):
         self.population -= 20
-        location = self.find_suitable_nearby_location(self.influence + 3)
+        location = self.find_suitable_nearby_location(self.influence + 4)
         if location is not None:
             expand_list.append(Holding(nameGen.get_city_name(), 'village', self.held_by, 20, True, 0, location))
             self.held_by.world_map[location[0]][location[1]].owner = self.held_by.name
