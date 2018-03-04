@@ -35,10 +35,18 @@ def find_suitable_location(world_map):
 
     for i in range(0, 50):
         trial_location = (random.randint(1, (world_size - 1)), random.randint(1, (world_size - 1)))
-        if world_map[trial_location[0]][trial_location[1]].terrain == "forest" or \
-                world_map[trial_location[0]][trial_location[1]].terrain == "grassland" or \
-                world_map[trial_location[0]][trial_location[1]].terrain == "hills":
-            return trial_location
+        location = validate_city_location(world_map, trial_location)
+        if location is not None:
+            return location
+
+
+def validate_city_location(world_map, trial_location):
+    if world_map[trial_location[0]][trial_location[1]].terrain == "forest" or \
+            world_map[trial_location[0]][trial_location[1]].terrain == "grassland" or \
+            world_map[trial_location[0]][trial_location[1]].terrain == "hills":
+        return trial_location
+    else:
+        return None
 
 
 def start_making_history(turns, civs, world_map):

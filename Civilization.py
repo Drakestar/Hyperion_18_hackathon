@@ -1,4 +1,6 @@
 import numpy as np
+
+import HistoryGen
 import nameGen
 
 
@@ -97,7 +99,7 @@ class Holding:
                     except IndexError:
                         pass
         for n in neighbors_list:
-            if n.owner != 'wild' or 'water' in n.terrain:
+            if n.owner != 'wild' or n.terrain.find("water") != -1:
                 neighbors_list.remove(n)
         if len(neighbors_list) > 0:
             return neighbors_list[
