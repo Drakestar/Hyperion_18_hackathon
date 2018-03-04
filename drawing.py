@@ -1,7 +1,5 @@
 import pygame
-from pygame.locals import *
 import constants
-
 
 
 # Given a terrain name it will return a color to be used
@@ -72,15 +70,8 @@ class Block(pygame.sprite.Sprite):
         self.rect.x = pos[0]
         self.rect.y = pos[1]
 
-    # Keeping Cursor stuff even if i don't use
-    # cursor = drawing.Block(constants.WHITE, 10, 10)
-    # all_sprites_list = pygame.sprite.Group()
-    # all_sprites_list.add(cursor)
-    # Put this back in game loop if use
-    # all_sprites_list.update()
-    # all_sprites_list.draw(display)
 
-
+# Given the width and height, and the amount of tiles, can return the indice of where a user clicks
 def get_indices(screenwidth, screenheight, tile_amount):
     # Get the mouse position then do calculation to get index of clicked tile
     mouse_x, mouse_y = pygame.mouse.get_pos()
@@ -94,10 +85,11 @@ def get_indices(screenwidth, screenheight, tile_amount):
     return mouse_x, mouse_y
 
 
+# Creates a list of labels from the information in a tile
 def tile_info(tile):
     myfont = pygame.font.SysFont("monospace", 25)
     label_list = []
-    # render text
+    # Render the fields text and append them to the label list
     label1 = myfont.render("Owner: " + tile.owner, 1, (0, 0, 0))
     label2 = myfont.render("Terrain: " + tile.terrain, 1, (0, 0, 0))
     label3 = myfont.render("Population: " + str(tile.population), 1, (0, 0, 0))
@@ -109,8 +101,20 @@ def tile_info(tile):
     return label_list
 
 
+# Adjusts each new label so they don't overlap
 def draw_text(display, label_list):
     text_y = 10
     for x in label_list:
         display.blit(x, (710, text_y))
         text_y += 30
+
+
+# Returns the label list for Yes/no
+def yes_labels():
+    label_list = []
+    myfont = pygame.font.SysFont("monospace", 75)
+    label1 = myfont.render("YES", 1, (0, 0, 0))
+    label2 = myfont.render("NO", 1, (0, 0, 0))
+    label_list.append(label1)
+    label_list.append(label2)
+    return label_list
