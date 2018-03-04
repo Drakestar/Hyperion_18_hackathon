@@ -67,13 +67,13 @@ def draw_civilization(tiles, display):
         for column in row:
             # Create the rectangle with no outline on squares
             for x in column.contains:
-                if x == "village":
+                if x.settlement_type == "village":
                     display.blit(villages, (x1, y1))
-                elif x == "town":
+                elif x.settlement_type == "town":
                     display.blit(towns, (x1, y1))
-                elif x == "city":
+                elif x.settlement_type == "city":
                     display.blit(citys, (x1, y1))
-                elif x == "metropolis":
+                elif x.settlement_type == "metropolis":
                     display.blit(metropoliss, (x1, y1))
             # Set the left corner to right corner x
             x1 += constants.WIDTH / len(row)
@@ -216,10 +216,11 @@ def tile_info(tile):
     # Render the fields text and append them to the label list
     label_list.append(myfont.render("Owner: " + tile.owner, 1, (0, 0, 0)))
     label_list.append(myfont.render("Terrain: " + constants.terraindict[tile.terrain], 1, (0, 0, 0)))
-    label_list.append(myfont.render("Population: " + str(tile.population), 1, (0, 0, 0)))
     label_list.append(myfont.render("Contains:", 1, (0, 0, 0)))
     for x in tile.contains:
-        label_list.append(myfont.render(str(x), 1, (0, 0, 0)))
+        label_list.append(myfont.render("City: " + x.name, 1, (0, 0, 0)))
+        label_list.append(myfont.render("Population: " + str(x.population), 1, (0, 0, 0)))
+        label_list.append(myfont.render("City Size: " + x.settlement_type, 1, (0, 0, 0)))
     return label_list
 
 

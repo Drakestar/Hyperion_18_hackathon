@@ -18,7 +18,9 @@ PURPLE = (204, 0, 204)
 YELLOW = (255, 255, 0)
 # The gray box on the side
 SQUAREOFTRUTH = (701, 0, 1000, 700)
-WORLDSIZE = 70
+WORLDSIZE = 50
+CIVS = 4
+TURNS = 25
 WIDTH = 700
 HEIGHT = 700
 # Used for showing the terrain to make it look better
@@ -31,4 +33,4 @@ terraindict = {'mountain': "Mountain",
                "saltwatershallow": "Shallow Saltwater",
                "saltwaterdeep": "Deep Saltwater",
                "desert": "Desert",
-               "swamp": "Swamp"}
+"swamp": "Swamp"}
