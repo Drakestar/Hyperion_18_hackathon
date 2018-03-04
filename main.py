@@ -28,8 +28,8 @@ def main():
         # Draw map, and option squares
         drawing.draw_geography(tile_map, display)
         pygame.draw.rect(display, constants.GRAY, constants.SQUAREOFTRUTH)
-        display.blit(label_list[0], (750, 140))
-        display.blit(label_list[1], (700, 490))
+        display.blit(label_list[0], (725, 40))
+        display.blit(label_list[1], (800, 375))
         pygame.draw.line(display, constants.BLACK, (700, 350), (1200, 350))
         # Look through all events
         for event in pygame.event.get():

@@ -110,7 +110,7 @@ def influence_borders(tiles, row, col):
     border_draws = []
     cur_owner = tiles[row][col].owner
     # Right neighbor
-    if col != len(tiles):
+    if col + 1 != len(tiles):
         if cur_owner != tiles[row][col + 1].owner:
             border_draws.append(0)
     # Left Neighbor
