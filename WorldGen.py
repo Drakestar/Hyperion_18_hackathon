@@ -14,8 +14,12 @@ def generate_terrain(world_map):
     for i_y, row in enumerate(world_map):
         for i_x, tile in enumerate(row):
             # Check if edge and turn into Deep saltwater
-            if tile.coordinate[0] == 0 or tile.coordinate[1] == 0 or tile.coordinate[0] == size or tile.coordinate[1] == size:
+            if tile.coordinate[0] == 0 or tile.coordinate[1] == 0 or tile.coordinate[0] == size or tile.coordinate[
+                1] == size:
                 tile.terrain = 'saltwaterdeep'
+            elif tile.coordinate[0] == 1 or tile.coordinate[1] == 1 or tile.coordinate[0] == size - 1 or \
+                    tile.coordinate[1] == size - 1:
+                tile.terrain = 'saltwatershallow'
             # Otherwise the terrain is in the center
             else:
                 # Get list of neighbors that have already been made
@@ -53,7 +57,7 @@ def generate_terrain(world_map):
                 if selection == 1:
                     # Do another selection to do a random new exotic terrain
                     rarity = [1, 2]
-                    selection2 = np.random.choice(rarity, p=[1-exotic_probability, exotic_probability])
+                    selection2 = np.random.choice(rarity, p=[1 - exotic_probability, exotic_probability])
                     if selection2 == 1:
                         tile.terrain = terrain_list[np.random.random_integers(0, 10000000) % 7]
                     else:
