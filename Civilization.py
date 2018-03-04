@@ -93,7 +93,7 @@ class Holding:
             for y in range(-influence, influence + 1):
                 if x == -influence or x == influcence + 1 or y == influence or y == influence + 1:
                     try:
-                       neighbors_list.append(world_map[location[0] + x][location[1] + y])
+                       neighbors_list.append(world_map[self.location[0] + x][slef.location[1] + y])
                     except IndexError:
                         pass
         for n in neighbors_list:
