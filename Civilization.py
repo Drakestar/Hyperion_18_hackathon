@@ -46,7 +46,7 @@ class Holding:
         self.location = location
         self.held_by = held_by
 
-    def stay_put(self):
+    def stay_put(self, world_map):
         exponent = np.random.random()  # random float between 0 and 1
         self.population = int(round((self.population * np.e ** exponent)))  # population growth function
         if self.population < 200:
@@ -55,14 +55,17 @@ class Holding:
             self.type = 'town'
             if not self.is_capital:
                 self.influence = 1
+                HistoryGen.update_city_influence(self.held_by, self.location, world_map, self.influence)
         elif self.population < 20000:
             self.type = 'city'
             if not self.is_capital:
                 self.influence = 2
+                HistoryGen.update_city_influence(self.held_by, self.location, world_map, self.influence)
         else:
             self.type = 'metropolis'
             if not self.is_capital:
                 self.influence = 3
+                HistoryGen.update_city_influence(self.held_by, self.location, world_map, self.influence)
         print(self.name, 'is now a', self.type, 'with a population of', self.population)
 
     def expand(self, location, world_map):
@@ -77,7 +80,7 @@ class Holding:
 
     def take_action(self, location, world_map):
         if self.population < 100:
-            self.stay_put()
+            self.stay_put(world_map)
         else:
             choices = [1, 2]
             if self.type == 'town':

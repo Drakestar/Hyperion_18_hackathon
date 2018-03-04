@@ -21,11 +21,11 @@ def generate_civs(civ_number, world_map):
     return civ_list
 
 
-def update_city_influence(name, location, world_map, influence):
+def update_city_influence(kingdom_name, location, world_map, influence):
     for x in range(-influence, influence + 1):
         for y in range(-influence, influence + 1):
             try:
-                world_map[location[0] + x][location[1] + y].owner = name
+                world_map[location[0] + x][location[1] + y].owner = kingdom_name
             except IndexError:
                 pass
 
