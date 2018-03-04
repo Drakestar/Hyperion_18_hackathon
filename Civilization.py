@@ -87,13 +87,18 @@ class Holding:
                 return self.expand(location)
 
     def find_valid_neighbor(self, world_map):
+        neighbors_list = []
+        influence = self.influence
         for x in range(-influence, influence + 1):
             for y in range(-influence, influence + 1):
-                try:
-                    world_map[location[0] + x][location[1] + y].owner = name
-                except IndexError:
-                    pass
-
+                if x == -influence or x == influcence + 1 or y == influence or y == influence + 1:
+                    try:
+                       neighbors_list.append(world_map[location[0] + x][location[1] + y])
+                    except IndexError:
+                        pass
+        for n in neighbors_list:
+            if n.owner != 'wild' or 'water' in n.terrain:
+                neighbors_list.remove(n)
         if len(neighbors_list) > 0:
             return neighbors_list[
                 np.random.random_integers(0, len(neighbors_list) - 1)]  # gets random selection from the
