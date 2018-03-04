@@ -2,3 +2,6 @@ A merchant wants you to guard a caravan travelling from <SETTLEMENT1> to <SETTLE
 A rich nobleman wants you to deliver an urgent message from <SETTLEMENT1> to <SETTLEMENT2> as fast as possible.
 You are currently in <SETTLEMENT1> but you heard word that <SETTLEMENT2> needs your help.
 You've recently heard rumours of war building in <SETTLEMENT1> but you've also heard rumours of war in <SETTLEMENT2>.
+Looking for work in <SETTLEMENT1> you hear that <SETTLEMENT2> is looking for constant labor.
+While drinking in the <SETTLEMENT1> tavern, you overhear a group of treasure hunters talking about a hidden temple near <SETTLEMENT2>
+Your search for the hidden treasures of Dargin the Dragon has lead you to <SETTLEMENT1> but you have not yet reached your destination of <SETTLEMENT2>

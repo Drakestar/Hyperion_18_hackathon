@@ -7,3 +7,4 @@ Kill <ENEMY>
 Rescue <ALLY>
 Steal <ITEM>
 Destroy <ITEM>
+Kidnap <ENEMY> on the orders of <ALLY>
