@@ -87,35 +87,12 @@ class Holding:
                 return self.expand(location)
 
     def find_valid_neighbor(self, world_map):
-        x_position = self.location[0] - 1
-        y_position = self.location[1] - 1
-
-        inf = self.influence  # need influence to check the proper tiles
-        neighbors_list = []
-        try:
-            north = world_map[x_position][y_position + inf].owner
-            if north == 'wild':
-                neighbors_list.append((x_position, y_position + inf))
-        except IndexError:
-            north = None
-        try:
-            south = world_map[x_position][y_position - inf].owner
-            if south == 'wild':
-                neighbors_list.append((x_position, y_position - inf))
-        except IndexError:
-            south = None
-        try:
-            east = world_map[x_position + inf][y_position].owner
-            if east == 'wild':
-                neighbors_list.append((x_position + inf, y_position))
-        except IndexError:
-            east = None
-        try:
-            west = world_map[x_position - inf][y_position].owner
-            if west == 'wild':
-                neighbors_list.append((x_position - inf, y_position))
-        except IndexError:
-            west = None
+        for x in range(-influence, influence + 1):
+            for y in range(-influence, influence + 1):
+                try:
+                    world_map[location[0] + x][location[1] + y].owner = name
+                except IndexError:
+                    pass
 
         if len(neighbors_list) > 0:
             return neighbors_list[
