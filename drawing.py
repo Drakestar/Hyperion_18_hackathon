@@ -2,6 +2,7 @@ import pygame
 import constants
 
 # Load all the images
+# Made by Delapouite under CC BY 3.0 on game-icons.net
 village = pygame.image.load('images/hut.png')
 town = pygame.image.load('images/cabin.png')
 city = pygame.image.load('images/village.png')
