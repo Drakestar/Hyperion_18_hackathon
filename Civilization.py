@@ -15,7 +15,8 @@ class Civilization:
     def take_actions(self, map):
         expand_list = []
         for holding in self.holdings_list:
-            city = holding.take_action()
+            location = holding.find_valid_neighbor(map)
+            city = holding.take_action(location)
             if city is not None:
                 expand_list.append(city)
             self.total_population += holding.population
@@ -41,8 +42,8 @@ class Holding:
         self.location = location
 
     def stay_put(self):
-        exponent = np.random.random()
-        self.population = int(round((self.population * np.e ** exponent)))
+        exponent = np.random.random()  # random float between 0 and 1
+        self.population = int(round((self.population * np.e ** exponent)))  # population growth function
         if self.population < 200:
             self.type = 'village'
         elif self.population < 2000:
@@ -59,47 +60,59 @@ class Holding:
                 self.influence = 3
         print(self.name, 'is now a ', self.type, 'with a population of ', self.population)
 
-    def expand(self):
+    def expand(self, location):
         self.population -= 20
         print(self.name, 'expanded, population = ', self.population)
-        return Holding(nameGen.get_city_name(), 'village', 20)
+        return Holding(nameGen.get_city_name(), 'village', 20,0,location)
 
-    def take_action(self):
+    def take_action(self,location):
         if self.population < 100:
             self.stay_put()
         else:
             choices = [1, 2]
             if self.type == 'town':
-                selection = np.random.choice(choices, p=[.8, .2])
+                selection = np.random.choice(choices, p=[.8, .2])  # 80% Chance of stay put, 20% chance of expanding
             elif self.type == 'city':
-                selection = np.random.choice(choices, p=[.5, .5])
+                selection = np.random.choice(choices, p=[.5, .5])  # 50/50 chance of action
             else:
-                selection = np.random.choice(choices, p=[.25, .75])
+                selection = np.random.choice(choices, p=[.25, .75])  # 75% chance of expansion
             if selection == 1:
                 self.stay_put()
             else:
-                return self.expand()
+                return self.expand(location)
 
-    def find_valid_neighbor(self, map):
+    def find_valid_neighbor(self, world_map):
         x_position = self.location[0] - 1
         y_position = self.location[1] - 1
 
-        inf = self.influence #need influence to check the proper tiles
-
+        inf = self.influence  # need influence to check the proper tiles
+        neighbors_list = []
         try:
             north = map[x_position][y_position + inf].owner
+            if north == 'wild':
+                neighbors_list.append((x_position, y_position + inf))
         except IndexError:
             north = None
         try:
             south = map[x_position][y_position - inf].owner
+            if south == 'wild':
+                neighbors_list.append((x_position, y_position - inf))
         except IndexError:
             south = None
         try:
             east = map[x_position + inf][y_position].owner
+            if east == 'wild':
+                neighbors_list.append((x_position + inf, y_position))
         except IndexError:
             east = None
         try:
             west = map[x_position - inf][y_position].owner
+            if west == 'wild':
+                neighbors_list.append((x_position - inf, y_position))
         except IndexError:
             west = None
+
+        return neighbors_list[random.random_integers(0, len(neighbors_list) - 1)]  # gets random selection from the
+    # location list
+
 
