@@ -94,11 +94,11 @@ def set_influence_colors(tiles):
     width = int(constants.WIDTH / len(tiles))
     resize = (width, width)
     color_list = []
-    color_list.append(pygame.transform.scale(red_tran, resize))
-    color_list.append(pygame.transform.scale(teal_tran, resize))
-    color_list.append(pygame.transform.scale(orange_tran, resize))
-    color_list.append(pygame.transform.scale(purple_tran, resize))
-    color_list.append(pygame.transform.scale(yellow_tran, resize))
+    color_list.append(constants.PURPLE)
+    color_list.append(constants.RED)
+    color_list.append(constants.ORANGE)
+    color_list.append(constants.YELLOW)
+    color_list.append(constants.TEAL)
     index = 0
     # Go through map and assign colors to owners
     for row in tiles:
@@ -111,22 +111,63 @@ def set_influence_colors(tiles):
     return owners
 
 
+def influence_borders(tiles, row, col):
+    border_draws = []
+    cur_owner = tiles[row][col].owner
+    # Right neighbor
+    if col != len(tiles):
+        if cur_owner != tiles[row][col + 1].owner:
+            border_draws.append(0)
+    # Left Neighbor
+    if col != 0:
+        if cur_owner != tiles[row][col - 1].owner:
+            border_draws.append(2)
+    # Up neighbor
+    if row != 0:
+        if cur_owner != tiles[row - 1][col].owner:
+            border_draws.append(1)
+    # Down neighbor
+    if row + 1 != len(tiles):
+        if cur_owner != tiles[row + 1][col].owner:
+            border_draws.append(3)
+    return border_draws
+
+
 def draw_influence(tiles, display, owners):
     # Set Square corners to 0
-    x1 = y1 = 0
+    x1 = y1 = x2 = y2 = 0
     # Go through each row of the tileset
-    for row in tiles:
+    for i_x, row in enumerate(tiles):
+        # The opposite corners y value updates
+        y2 += constants.HEIGHT / len(tiles)
         # Go through every column in the row
-        for column in row:
+        for i_y, column in enumerate(row):
+            # Advance the location of the bottom right corner of square
+            x2 += constants.WIDTH / len(row)
             # Create the rectangle with no outline on squares
             if column.owner != 'wild':
-                display.blit(owners[column.owner], (x1, y1))
+                for x in influence_borders(tiles, i_x, i_y):
+                    # Draw Right
+                    if x == 0:
+                        pygame.draw.line(display, owners[column.owner], (x2, y1), (x2, y2))
+                    # Draw Up
+                    if x == 1:
+                        pygame.draw.line(display, owners[column.owner], (x1, y1), (x2, y1))
+                    # Draw left
+                    if x == 2:
+                        pygame.draw.line(display, owners[column.owner], (x1, y1), (x1, y2))
+                    # Draw down:
+                    if x == 3:
+                        pygame.draw.line(display, owners[column.owner], (x1, y2), (x2, y2))
+
             # Set the left corner to right corner x
-            x1 += constants.WIDTH / len(row)
-        # Advance y to go down and reset x
-        x1 = 0
-        y1 += constants.HEIGHT / len(tiles)
+            x1 = x2
+        # Advance y to go down
+        y1 = y2
         # Reset x location of boxes
+        x1 = x2 = 0
+    # Set Square corners to 0
+    x1 = y1 = 0
 
 
 class Block(pygame.sprite.Sprite):

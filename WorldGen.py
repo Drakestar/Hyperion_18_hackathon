@@ -1,5 +1,3 @@
-import tile
-import random
 import numpy as np
 
 

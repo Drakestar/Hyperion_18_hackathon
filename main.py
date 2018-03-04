@@ -48,7 +48,7 @@ def main():
         pygame.display.update()
     # Clear the yes/no labels
     label_list.clear()
-    HistoryGen.start_making_history(25, 5, tile_map)
+    HistoryGen.start_making_history(10, 4, tile_map)
     owner_list = drawing.set_influence_colors(tile_map)
     # Main "game" loop, where the user can inspect specific squares
     while True:
@@ -66,7 +66,6 @@ def main():
             # User clicks a square it gives information
             if event.type == MOUSEBUTTONDOWN:
                 tile_x, tile_y = drawing.get_indices(constants.WIDTH, constants.HEIGHT, len(tile_map))
-                print(tile_x, tile_y, len(tile_map))
                 label_list = drawing.tile_info(tile_map[tile_y][tile_x])
         # Draw the text when tile clicked
         drawing.draw_text(display, label_list)
