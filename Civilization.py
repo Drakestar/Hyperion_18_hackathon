@@ -90,9 +90,10 @@ class Holding:
         self.population -= 20
         location = self.find_suitable_nearby_location(self.influence + 4)
         if location is not None:
-            expand_list.append(Holding(nameGen.get_city_name(), 'village', self.held_by, 20, True, 0, location))
+            holding = Holding(nameGen.get_city_name(), 'village', self.held_by, 20, True, 0, location)
+            expand_list.append(holding)
             self.held_by.world_map[location[0]][location[1]].owner = self.held_by.name
-            self.held_by.world_map[location[0]][location[1]].contains.append("village")
+            self.held_by.world_map[location[0]][location[1]].contains.append(holding)
             HistoryGen.update_city_influence(self.held_by.name, location, self.held_by.world_map, 0)
         else:
             # print("No Suitable Expansions Found")
