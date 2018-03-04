@@ -214,7 +214,7 @@ def tile_info(tile):
     label_list = []
     # Render the fields text and append them to the label list
     label_list.append(myfont.render("Owner: " + tile.owner, 1, (0, 0, 0)))
-    label_list.append(myfont.render("Terrain: " + tile.terrain, 1, (0, 0, 0)))
+    label_list.append(myfont.render("Terrain: " + constants.terraindict[tile.terrain], 1, (0, 0, 0)))
     label_list.append(myfont.render("Population: " + str(tile.population), 1, (0, 0, 0)))
     label_list.append(myfont.render("Contains:", 1, (0, 0, 0)))
     for x in tile.contains:
