@@ -126,14 +126,12 @@ def tile_info(tile):
     myfont = pygame.font.SysFont("monospace", 25)
     label_list = []
     # Render the fields text and append them to the label list
-    label1 = myfont.render("Owner: " + tile.owner, 1, (0, 0, 0))
-    label2 = myfont.render("Terrain: " + tile.terrain, 1, (0, 0, 0))
-    label3 = myfont.render("Population: " + str(tile.population), 1, (0, 0, 0))
-    label4 = myfont.render("Contains: " + str(tile.contains), 1, (0, 0, 0))
-    label_list.append(label1)
-    label_list.append(label2)
-    label_list.append(label3)
-    label_list.append(label4)
+    label_list.append(myfont.render("Owner: " + tile.owner, 1, (0, 0, 0)))
+    label_list.append(myfont.render("Terrain: " + tile.terrain, 1, (0, 0, 0)))
+    label_list.append(myfont.render("Population: " + str(tile.population), 1, (0, 0, 0)))
+    label_list.append(myfont.render("Contains:", 1, (0, 0, 0)))
+    for x in tile.contains:
+        label_list.append(myfont.render(str(x), 1, (0, 0, 0)))
     return label_list
 
 
