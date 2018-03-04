@@ -15,5 +15,6 @@ start = time.time()
 i = 0
 for i in range(10000):
     instance = npc.Npc()
+    print(str(instance))
     npcs.append(instance)
 print(time.time() - start)
