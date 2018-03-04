@@ -1,0 +1,17 @@
+import questGen
+
+print(questGen.get_theme())
+print(questGen.get_theme())
+print(questGen.get_theme())
+print(questGen.get_theme())
+print(questGen.get_theme())
+print(questGen.get_theme())
+print(questGen.get_theme())
+print(questGen.get_theme())
+print(questGen.get_theme())
+print(questGen.get_theme())
+print(questGen.get_theme())
+print(questGen.get_theme())
+print(questGen.get_theme())
+print(questGen.get_theme())
+print(questGen.get_theme())

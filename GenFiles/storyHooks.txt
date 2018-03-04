@@ -1,0 +1,4 @@
+A merchant wants you to guard a caravan travelling from <SETTLEMENT1> to <SETTLEMENT2>.
+A rich nobleman wants you to deliver an urgent message from <SETTLEMENT1> to <SETTLEMENT2> as fast as possible.
+You are currently in <SETTLEMENT1> but you heard word that <SETTLEMENT2> needs your help.
+You've recently heard rumours of war building in <SETTLEMENT1> but you've also heard rumours of war in <SETTLEMENT2>.
