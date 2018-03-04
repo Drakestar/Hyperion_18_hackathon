@@ -53,9 +53,11 @@ def start_making_history(turns, civs, world_map):
     civilizations = generate_civs(civs, world_map)
 
     for i in range(turns):
+        print("\n----- Generation " + str(i) + " -----")
         for civ in civilizations:
             civ.take_actions(world_map)
 
+    print("\n----- Results -----")
     for civ in civilizations:
         print('Name:', civ.name)
         print('Population:', civ.total_population)
