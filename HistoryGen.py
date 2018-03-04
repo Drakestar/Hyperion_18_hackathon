@@ -46,7 +46,8 @@ def validate_city_location(world_map, trial_location):
     print(trial_location[0], trial_location[1])
     if world_map[trial_location[0]][trial_location[1]].terrain == "forest" or \
             world_map[trial_location[0]][trial_location[1]].terrain == "grassland" or \
-            world_map[trial_location[0]][trial_location[1]].terrain == "hills":
+            world_map[trial_location[0]][trial_location[1]].terrain == "hills" or \
+            world_map[trial_location[0]][trial_location[1]].owned == "wild":
         return trial_location
     else:
         return None
