@@ -57,7 +57,7 @@ def generate_terrain(world_map):
                     if selection2 == 1:
                         tile.terrain = terrain_list[np.random.random_integers(0, 10000000) % 7]
                     else:
-                        print(np.random.random_integers(0, 100000) % 4)
+                        # print(np.random.random_integers(0, 100000) % 4)
                         tile.terrain = exotic_list[np.random.random_integers(0, 1000000) % 4]
                 # Select neighbor terrain
                 elif selection == 2:
