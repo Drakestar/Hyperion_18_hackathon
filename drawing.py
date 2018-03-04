@@ -6,11 +6,6 @@ village = pygame.image.load('images/hut.png')
 town = pygame.image.load('images/cabin.png')
 city = pygame.image.load('images/village.png')
 metropolis = pygame.image.load('images/castle.png')
-red_tran = pygame.image.load('images/red.png')
-teal_tran = pygame.image.load('images/teal.png')
-orange_tran = pygame.image.load('images/orange.png')
-purple_tran = pygame.image.load('images/purple.png')
-yellow_tran = pygame.image.load('images/yellow.png')
 
 
 # Given a terrain name it will return a color to be used
@@ -238,7 +233,7 @@ def draw_text(display, label_list):
 # Returns the label list for Yes/no
 def yes_labels():
     label_list = []
-    myfont = pygame.font.SysFont("monospace", 75)
+    myfont = pygame.font.SysFont("monospace", 250)
     label1 = myfont.render("YES", 1, (0, 0, 0))
     label2 = myfont.render("NO", 1, (0, 0, 0))
     label_list.append(label1)
