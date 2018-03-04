@@ -1,14 +1,15 @@
 from numpy import random
-
 import Civilization
 import nameGen
 
 
+# Given the number of civilization and the world map places the 'capital' cities around the map
 def generate_civs(civ_number, world_map):
     civ_list = []
+    # Pull from civilization list and append the name to the civilization
     for i in range(civ_number):
         civ_list.append(Civilization.Civilization(nameGen.get_civilization_name(), 20, []))
-
+    # For every civilization created find a suitable location for them and place them
     for civ in civ_list:
         location = find_suitable_location(world_map)
         # elf, name: str, type: str, population: int, is_capital: bool, influence: int, location: (int, int)
@@ -21,6 +22,7 @@ def generate_civs(civ_number, world_map):
     return civ_list
 
 
+# Try to change the cities influence based on size
 def update_city_influence(kingdom_name, location, world_map, influence):
     for x in range(-influence, influence + 1):
         for y in range(-influence, influence + 1):
@@ -41,6 +43,7 @@ def find_suitable_location(world_map):
 
 
 def validate_city_location(world_map, trial_location):
+    print(trial_location[0], trial_location[1])
     if world_map[trial_location[0]][trial_location[1]].terrain == "forest" or \
             world_map[trial_location[0]][trial_location[1]].terrain == "grassland" or \
             world_map[trial_location[0]][trial_location[1]].terrain == "hills":

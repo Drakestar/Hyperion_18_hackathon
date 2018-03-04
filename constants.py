@@ -2,7 +2,7 @@ MOUNTAIN = (128, 128, 128)
 GRASSLAND = (0, 180, 0)
 FOREST = (34, 139, 34)
 HILLS = (110, 120, 40)
-FRESHDEEP = (75, 150, 150)
+FRESHDEEP = (75, 175, 175)
 FRESHSHALLOW = (144, 238, 238)
 SALTDEEP = (0, 104, 139)
 SALTSHALLOW = (0, 154, 205)
@@ -18,9 +18,10 @@ PURPLE = (204, 0, 204)
 YELLOW = (255, 255, 0)
 # The gray box on the side
 SQUAREOFTRUTH = (701, 0, 1000, 700)
-WORLDSIZE = 60
+WORLDSIZE = 70
 WIDTH = 700
 HEIGHT = 700
+# Used for showing the terrain to make it look better
 terraindict = {'mountain': "Mountain",
                'grassland': "Grassland",
                "forest": "Forest",

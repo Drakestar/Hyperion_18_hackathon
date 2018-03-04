@@ -2,6 +2,7 @@
 import pygame
 from pygame.locals import *
 import sys
+import copy
 # File imports
 import constants
 import HistoryGen
@@ -20,7 +21,6 @@ def main():
     # Generate the first tilemap
     WorldGen.generate_terrain(tile_map)
     # Variables
-    label_list = []
     label_list = drawing.yes_labels()
     # Loop through until the user is happy with the map
     loop_var = True
@@ -46,13 +46,43 @@ def main():
                     else:
                         loop_var = False
         pygame.display.update()
-    # Clear the yes/no labels
-    label_list.clear()
+    # Generate history and then loop until user is also satisfied with that
+    backup_map = copy.deepcopy(tile_map)
     HistoryGen.start_making_history(10, 4, tile_map)
     owner_list = drawing.set_influence_colors(tile_map)
+    # Loop through until the user is happy with the map
+    loop_var = True
+    while loop_var:
+        # Draw map, and option squares
+        drawing.draw_geography(tile_map, display)
+        drawing.draw_civilization(tile_map, display)
+        drawing.draw_influence(tile_map, display, owner_list)
+        pygame.draw.rect(display, constants.GRAY, constants.SQUAREOFTRUTH)
+        display.blit(label_list[0], (725, 40))
+        display.blit(label_list[1], (800, 375))
+        pygame.draw.line(display, constants.BLACK, (700, 350), (1200, 350))
+        # Look through all events
+        for event in pygame.event.get():
+            # Quit
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            # User clicks either yes or no to finish making maps or move on
+            if event.type == MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+                if mouse_x > 700:
+                    if mouse_y > 350:
+                        tile_map = copy.deepcopy(backup_map)
+                        HistoryGen.start_making_history(10, 4, tile_map)
+                        owner_list = drawing.set_influence_colors(tile_map)
+                    else:
+                        loop_var = False
+        pygame.display.update()
+    # Clear the yes/no labels, generate a history given the tile_map and develop the owners of the colors
+    label_list.clear()
     # Main "game" loop, where the user can inspect specific squares
     while True:
-        # Draw map
+        # Draw geography, civilizations, influence, then the info box
         drawing.draw_geography(tile_map, display)
         drawing.draw_civilization(tile_map, display)
         drawing.draw_influence(tile_map, display, owner_list)

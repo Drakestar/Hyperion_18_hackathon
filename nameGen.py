@@ -2,9 +2,6 @@ import random
 
 
 # human name generators
-# human names
-
-
 def get_first_name_human_male():
     return (random.choice(open("./GenFiles/maleNames.txt", "r").readlines())).replace("\n", "")
 

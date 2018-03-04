@@ -1,9 +1,8 @@
 import nameGen
 import random
-
 import professionGen
 
-
+# Class for npc that sets as base values before being adjusted
 class Npc:
     gender = "male"
     name = "name"
