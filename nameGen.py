@@ -1,39 +1,37 @@
 import random
 
-human_male_first_names = []
-human_female_first_names = []
-humanSurnames = []
-
-
-# read names from name lists
-
-
-
 
 # human name generators
 # human names
 
 
 def get_first_name_human_male():
-    return random.choice(open("file").readLines())
+    return (random.choice(open("maleNames.txt", "r").readlines())).replace("\n", "")
 
 
 def get_full_name_human_male():
-    return "First Name"
+    return (str(random.choice(open("maleNames.txt", "r").readlines())) + " " + str(random.choice(open("surnames.txt", "r").readlines()))).replace("\n", "")
 
 
 def get_first_name_human_female():
-    return "First Name"
+    return (random.choice(open("femaleNames.txt", "r").readlines())).replace("\n", "")
 
 
 def get_full_name_human_female():
-    return "First Name"
+    return (str(random.choice(open("femaleNames.txt", "r").readlines())) + " " + str(random.choice(open("surnames.txt", "r").readlines()))).replace("\n", "")
 
 
 def get_surname_name_human():
-    return "First Name"
+    return (random.choice(open("surnames.txt", "r").readlines())).replace("\n", "")
 
 
 # human cities
+def get_city_name():
+    return (random.choice(open("historicCityNames.txt", "r").readlines())).replace("\n", "")
+
+
 def get_civilization_name():
-    return "Generic Village"
+    return "Here's your name Jacob"
+
+
+
